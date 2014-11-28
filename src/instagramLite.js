@@ -28,6 +28,9 @@ Licensed under the MIT license
             urls: false,
             max_id: null,
             loadMore: null,
+            custom_url: null,
+            display_titles: false,
+            display_titles_length: 40,
             error: function() {},
             success: function() {}
         }
@@ -110,17 +113,43 @@ Licensed under the MIT license
 								        			
 								        			// if media type is image
 								        			if(thisMedia.type === 'image') {
-								        			
+
 									        			// construct image
-									        			var img = '<img src="'+thisMedia.images.standard_resolution.url+'" alt="Instagram Image" data-filter="'+thisMedia.filter+'" />';
-	
+									        			var img = '<img src="'+thisMedia.images.standard_resolution.url+'" alt="'+thisMedia.caption.text+'" data-filter="'+thisMedia.filter+'" />';
+
+
+                                                        var url = null;
 									        			// if url setting is true
 									        			if(plugin.settings.urls) {
-									        			
-									        				var img = '<a href="'+thisMedia.link+'" target="_blank">'+img+'</a>';
-										        			
+                                                            url = thisMedia.link;
 									        			}
-									        			
+
+                                                        // if custom_url setting is true
+                                                        if(plugin.settings.custom_url) {
+                                                            url = plugin.settings.custom_url;
+                                                        }
+
+                                                        if (url) {
+                                                            var img = '<a href="' + url + '" target="_blank">' + img + '</a>';
+                                                        }
+
+                                                        // if display_titles setting is true
+                                                        if(plugin.settings.display_titles) {
+                                                            var post_title;
+                                                            if (thisMedia.caption.text.length > plugin.settings.display_titles_length)
+                                                                post_title = thisMedia.caption.text.substr(0, plugin.settings.display_titles_length) + "..";
+                                                            else
+                                                                post_title = thisMedia.caption.text;
+
+                                                            if (url)
+                                                                post_title = '<div class="inst_photo_title"> <a href="'+ url +'" target="_blank"> '+ post_title +'</a></div>';
+                                                            else
+                                                                post_title = '<div class="inst_photo_title">'+ post_title +'</div>';
+
+                                                            img += post_title;
+                                                        }
+
+
 									        			// if list setting is true
 									        			if(plugin.settings.list) {
 									        				var img = '<li>'+img+'</li>';
