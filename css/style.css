@@ -34,10 +34,25 @@ ul li {
 	padding: 0;
 	float: left;
 	width: 200px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 ul li img {
 	display: block;
 	width: 100%;
 	height: auto;
+}
+
+.inst_photo_title {
+    padding-top: 10px;
+    text-align: center;
+    font-size: 90%;
+    color: #666666;
+    height: 60px;
+}
+
+.inst_photo_title a {
+    font-size: 90%;
+    color: #666666;
 }
