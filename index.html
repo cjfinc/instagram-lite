@@ -37,9 +37,12 @@
 			$('.images').instagramLite({
 				username: 'acozykitchen',
 				clientID: '199554eb34504658a4770d2859b5a583',
-				limit: 10,
-				urls: true,
-				loadMore: true,
+		                limit: 4,
+		                urls: false,
+		                loadMore: '.load-more',
+		                custom_url: 'http://google.com/',
+		                display_titles: true,
+		                display_titles_length: 50,
 				error: function(errorCode, errorMessage) {
 				
 					console.log('There was an error');
